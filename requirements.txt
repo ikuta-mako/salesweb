@@ -3,4 +3,4 @@ gunicorn
 pymongo
 dnspython
 whitenoise
-matplotlib
+matplotlib==3.8.0
