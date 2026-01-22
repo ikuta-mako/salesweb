@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>{{ tenpo_name }} の売上グラフ</h1>
+
+<img src="/static/{{ graph_file }}">
+
+<p>
+<a href="?mode=visitors">来客数</a> |
+<a href="?mode=amount">売上金額</a>
+</p>
+
+        <a href="javascript:window.print();">印刷</a>
+
+    <p>
+        <a href="/">← TOPに戻る</a>
+    </p>
+</body>
+</html>

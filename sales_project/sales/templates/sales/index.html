@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>売上TOPページ</h1>
+    <h3>店舗名を押すとその店舗の売り上げが見れるよ！</h3>
+
+{% for tenpo in tenpo_list %}
+<p>
+  <a href="{% url 'tenpo_detail' tenpo.id %}">
+    {{ tenpo.name }}
+  </a>
+</p>
+{% endfor %}
+</body>
+</html>
