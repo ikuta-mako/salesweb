@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-#rp*e5dk5*mc!3z9%06=r+%xftwaldo5@*(8xc23i^=3&hjb7m
 DEBUG = True
 
 ALLOWED_HOSTS = ["salesweb-1.onrender.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://salesweb-1.onrender.com"
+]
 
 
 # Application definition
@@ -121,3 +124,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
+
