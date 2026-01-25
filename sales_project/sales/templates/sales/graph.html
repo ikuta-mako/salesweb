@@ -7,9 +7,8 @@
 </head>
 <body>
     <h1>{{ tenpo_name }} の売上グラフ</h1>
-
     
-    <canvas id="myChart"></canvas>
+    <canvas id="myChart" height="100"></canvas>
 
     <p>
         <a href="?mode=visitors">来客数</a> |
@@ -23,20 +22,30 @@
     </p>
 
     
-    <script>
-        const labels = {{ labels|safe }};
-        const values = {{ values|safe }};
+    
+       <script>
+    const labels = {{ labels|safe }};
+    const values = {{ values|safe }};
+    const mode = "{{ mode }}";
 
-        new Chart(document.getElementById("myChart"), {
-            type: "bar",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: "{{ graph_label }}",
-                    data: values,
-                }]
-            }
-        });
-    </script>
+    const chartType = mode === "visitors" ? "line" : "bar";
+
+    new Chart(document.getElementById("myChart"), {
+        type: chartType,
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "{{ graph_label }}",
+                data: values,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+</script>
+
 </body>
 </html>
+
