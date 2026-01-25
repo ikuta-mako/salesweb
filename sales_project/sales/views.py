@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .mongo import uriage_col, tenpo_col
 import os
 from django.conf import settings
+import json
 
 #トップページ
 def top(request):
@@ -70,13 +71,14 @@ def tenpo_graph(request, tenpo_id):
         values = [d["amount"] for d in data]
         label_name = "売上金額"
 
-    return render(request, "sales/graph.html", {
-        "tenpo_name": tenpo["name"],
-        "labels": labels,
-        "values": values,
-        "label_name": label_name,
-        "mode": mode,
-    })
+  return render(request, "sales/graph.html", {
+    "tenpo_name": tenpo["name"],
+    "labels": json.dumps(labels),
+    "values": json.dumps(values),
+    "graph_label": label_name,
+    "mode": mode,
+})
+
 
 
 
@@ -121,6 +123,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
