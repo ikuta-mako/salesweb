@@ -46,9 +46,9 @@ def tenpo_detail(request, tenpo_id):
 
 #グラフ作成
 def tenpo_graph(request, tenpo_id):
-    import matplotlib
-    matplotlib.use("Agg")  
-    import matplotlib.pyplot as plt
+   # import matplotlib
+   # matplotlib.use("Agg")  
+   # import matplotlib.pyplot as plt
     
     tenpo_id = int(tenpo_id)
     
@@ -143,4 +143,5 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
