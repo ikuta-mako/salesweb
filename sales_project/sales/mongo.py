@@ -2,7 +2,7 @@ import os
 from pymongo import MongoClient
 
 MONGO_URI = os.environ.get("MONGO_URI")
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
 db = client["sales_db"]
 
 
@@ -24,5 +24,6 @@ def get_sales_data():
             "date": u["date"],
             "amount": u["amount"],
         })
+
 
     return result
