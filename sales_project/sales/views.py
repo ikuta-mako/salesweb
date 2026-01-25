@@ -9,13 +9,19 @@ import json
 
 #トップページ
 def top(request):
-    try:
+     # MongoDB接続
+        client = MongoClient(settings.MONGO_URI)
+        db = client[settings.MONGO_DB_NAME]
+        tenpo_col = db["tenpo"]
+
+        # データ取得
         tenpo_list = []
         for t in tenpo_col.find():
             tenpo_list.append({
                 "id": t["tenpo_id"],
                 "name": t["name"]
             })
+            
     except Exception as e:
         return render(request, "sales/index.html", {
             "tenpo_list": [],
@@ -131,6 +137,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
