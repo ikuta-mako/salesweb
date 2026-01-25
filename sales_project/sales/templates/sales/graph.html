@@ -2,21 +2,41 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <title>売上グラフ</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>{{ tenpo_name }} の売上グラフ</h1>
 
-<img src="/static/{{ graph_file }}">
+    
+    <canvas id="myChart"></canvas>
 
-<p>
-<a href="?mode=visitors">来客数</a> |
-<a href="?mode=amount">売上金額</a>
-</p>
+    <p>
+        <a href="?mode=visitors">来客数</a> |
+        <a href="?mode=amount">売上金額</a>
+    </p>
 
-        <a href="javascript:window.print();">印刷</a>
+    <a href="javascript:window.print();">印刷</a>
 
     <p>
         <a href="/">← TOPに戻る</a>
     </p>
+
+    
+    <script>
+        const labels = {{ labels|safe }};
+        const values = {{ values|safe }};
+
+        new Chart(document.getElementById("myChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "{{ graph_label }}",
+                    data: values,
+                }]
+            }
+        });
+    </script>
 </body>
 </html>
