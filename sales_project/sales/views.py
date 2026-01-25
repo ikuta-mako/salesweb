@@ -3,7 +3,6 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from .mongo import uriage_col, tenpo_col
-import matplotlib.pyplot as plt
 import os
 from django.conf import settings
 
@@ -47,6 +46,10 @@ def tenpo_detail(request, tenpo_id):
 
 #グラフ作成
 def tenpo_graph(request, tenpo_id):
+    import matplotlib
+    matplotlib.use("Agg")  
+    import matplotlib.pyplot as plt
+    
     tenpo_id = int(tenpo_id)
     
     mode = request.GET.get("mode", "amount")
@@ -140,3 +143,4 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
