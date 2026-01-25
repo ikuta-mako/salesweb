@@ -46,12 +46,7 @@ def tenpo_detail(request, tenpo_id):
 
 #グラフ作成
 def tenpo_graph(request, tenpo_id):
-   # import matplotlib
-   # matplotlib.use("Agg")  
-   # import matplotlib.pyplot as plt
-    
     tenpo_id = int(tenpo_id)
-    
     mode = request.GET.get("mode", "amount")
 
     data = list(
@@ -66,40 +61,23 @@ def tenpo_graph(request, tenpo_id):
             "error": "売上データがありません"
         })
 
-    dates = [d["date"] for d in data]
+    labels = [d["date"] for d in data]
 
     if mode == "visitors":
         values = [d["visitors"] for d in data]
+        label_name = "来客数"
     else:
         values = [d["amount"] for d in data]
-
-    plt.figure()
-
-    if mode == "visitors":
-        plt.plot(dates, values)
-        plt.ylabel("来客数")
-    else:
-        plt.bar(dates, values)
-        plt.ylabel("売上金額")
-
-    plt.xlabel("日付")
-    plt.title("売上グラフ")
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-
-    static_dir = os.path.join(settings.STATICFILES_DIRS[0], "sales")
-    os.makedirs(static_dir, exist_ok=True)
-
-    filename = f"graph_{tenpo_id}.png"
-    path = os.path.join(static_dir, filename)
-
-    plt.savefig(path)
-    plt.close()
+        label_name = "売上金額"
 
     return render(request, "sales/graph.html", {
         "tenpo_name": tenpo["name"],
-        "graph_file": f"sales/{filename}"
+        "labels": labels,
+        "values": values,
+        "label_name": label_name,
+        "mode": mode,
     })
+
 
 
 #ローカルLLMによる売り上げ要約
@@ -143,5 +121,6 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
