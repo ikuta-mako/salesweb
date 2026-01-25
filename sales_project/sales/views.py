@@ -9,16 +9,23 @@ import json
 
 #トップページ
 def top(request):
-    tenpo_list = []
-    for t in tenpo_col.find():
-        tenpo_list.append({
-            "id": t["tenpo_id"],   
-            "name": t["name"]
+    try:
+        tenpo_list = []
+        for t in tenpo_col.find():
+            tenpo_list.append({
+                "id": t["tenpo_id"],
+                "name": t["name"]
+            })
+    except Exception as e:
+        return render(request, "sales/index.html", {
+            "tenpo_list": [],
+            "error": f"DB接続エラー: {e}"
         })
 
     return render(request, "sales/index.html", {
         "tenpo_list": tenpo_list
     })
+
 
 #売上一覧
 def tenpo_detail(request, tenpo_id):
@@ -124,6 +131,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
