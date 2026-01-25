@@ -124,12 +124,25 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 
 ]
+import os
+from pymongo import MongoClient
+
+MONGO_URI = os.environ.get("MONGODB_URI")
+MONGO_DB = os.environ.get("MONGODB_DB")
+
+client = MongoClient(MONGO_URI)
+db = client[MONGO_DB]
+
+tenpo_col = db["tenpo"]
+uriage_col = db["uriage"]
+
 
 # ------------------------------
 # MongoDB Atlas 接続設定
 # ------------------------------
 MONGO_URI = "mongodb+srv://mako:sanokeita23@cluster.mongodb.net/sales_db?retryWrites=true&w=majority"
 MONGO_DB_NAME = "sales_db"
+
 
 
 
