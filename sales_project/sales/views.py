@@ -62,22 +62,23 @@ def tenpo_graph(request, tenpo_id):
             "error": "売上データがありません"
         })
 
-    labels = [d["date"] for d in data]
+    labels = [str(d["date"]) for d in data]
 
     if mode == "visitors":
         values = [d["visitors"] for d in data]
-        label_name = "来客数"
+        graph_label = "来客数"
     else:
         values = [d["amount"] for d in data]
-        label_name = "売上金額"
+        graph_label = "売上金額"
 
-  return render(request, "sales/graph.html", {
-    "tenpo_name": tenpo["name"],
-    "labels": json.dumps(labels),
-    "values": json.dumps(values),
-    "graph_label": label_name,
-    "mode": mode,
-})
+    return render(request, "sales/graph.html", {
+        "tenpo_name": tenpo["name"],
+        "labels": labels,
+        "values": values,
+        "graph_label": graph_label,
+        "mode": mode,
+    })
+
 
 
 
@@ -123,6 +124,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
