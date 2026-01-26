@@ -7,13 +7,15 @@ import os
 from django.conf import settings
 import json
 
+client = MongoClient(settings.MONGO_URI)
+db = client[settings.MONGO_DB]
+tenpo_col = db["tenpo"]
+uriage_col = db["uriage"]
+
+
 #トップページ
 def top(request):
-     # MongoDB接続
-        client = MongoClient(settings.MONGO_URI)
-        db = client[settings.MONGO_DB_NAME]
-        tenpo_col = db["tenpo"]
-
+　  try:
         # データ取得
         tenpo_list = []
         for t in tenpo_col.find():
@@ -137,6 +139,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
