@@ -11,6 +11,11 @@ import json
 #トップページ
 def top(request):
     try:
+        count = tenpo_col.count_documents({})
+        first = tenpo_col.find_one({})
+        print("TENPO COUNT:", count)
+        print("TENPO FIRST:", first)
+        
         tenpo_list = [
             {"id": t["tenpo_id"], "name": t["name"]}
             for t in tenpo_col.find()
@@ -129,6 +134,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
