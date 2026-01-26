@@ -15,7 +15,7 @@ uriage_col = db["uriage"]
 
 #トップページ
 def top(request):
-　  try:
+        try:
         # データ取得
         tenpo_list = []
         for t in tenpo_col.find():
@@ -139,6 +139,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
