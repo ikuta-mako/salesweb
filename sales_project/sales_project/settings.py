@@ -140,8 +140,9 @@ uriage_col = db["uriage"]
 # ------------------------------
 # MongoDB Atlas 接続設定
 # ------------------------------
-MONGO_URI = "mongodb+srv://mako:sanokeita23@cluster.mongodb.net/sales_db?retryWrites=true&w=majority"
-MONGO_DB_NAME = "sales_db"
+#MONGO_URI = "mongodb+srv://mako:sanokeita23@cluster.mongodb.net/sales_db?retryWrites=true&w=majority"
+#MONGO_DB_NAME = "sales_db"
+
 
 
 
