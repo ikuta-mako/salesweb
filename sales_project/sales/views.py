@@ -16,12 +16,12 @@ def top(request):
             {"id": t["tenpo_id"], "name": t["name"]}
             for t in tenpos
         ]
-        return render(
+     return render(
             request,
             "sales/index.html",
             {"tenpo_list": tenpo_list}
         )
-    except Exception as e:
+     except Exception as e:
         return render(
             request,
             "sales/index.html",
@@ -135,6 +135,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
