@@ -15,15 +15,13 @@ uriage_col = db["uriage"]
 
 #トップページ
 def top(request):
-        try:
-        # データ取得
+    try:
         tenpo_list = []
         for t in tenpo_col.find():
             tenpo_list.append({
                 "id": t["tenpo_id"],
                 "name": t["name"]
             })
-            
     except Exception as e:
         return render(request, "sales/index.html", {
             "tenpo_list": [],
@@ -139,6 +137,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
