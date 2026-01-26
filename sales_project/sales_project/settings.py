@@ -127,10 +127,9 @@ STATICFILES_DIRS = [
 import os
 
 MONGO_URI = os.environ.get(
-    "MONGODB_URI",
-    "mongodb+srv://mako:<db_password>@cluster0.odubgl9.mongodb.net/?appName=Cluster0"
-)
+    "MONGODB_URI")
 MONGO_DB = os.environ.get("MONGODB_DB", "sales_db")  
+
 
 
 
