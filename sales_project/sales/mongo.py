@@ -1,15 +1,27 @@
+# sales/mongo.py
 from django.conf import settings
 from pymongo import MongoClient
 
-# settings.py で MONGO_URI と MONGO_DB_NAME を定義しておく前提
-client = MongoClient(settings.MONGO_URI)
-db = client[settings.MONGO_DB]
+def get_db():
+    # 5秒で諦める（Renderのタイムアウト回避）
+    client = MongoClient(
+        settings.MONGO_URI,
+        serverSelectionTimeoutMS=5000,
+        connectTimeoutMS=5000,
+        socketTimeoutMS=5000,
+    )
+    return client[settings.MONGO_DB]
 
-tenpo_col = db["tenpo"]
-uriage_col = db["uriage"]
+def get_tenpo_col():
+    return get_db()["tenpo"]
 
+def get_uriage_col():
+    return get_db()["uriage"]
 
 def get_sales_data():
+    tenpo_col = get_tenpo_col()
+    uriage_col = get_uriage_col()
+
     tenpos = list(tenpo_col.find({}, {"_id": 0}))
     uriages = list(uriage_col.find({}, {"_id": 0}))
 
@@ -25,4 +37,3 @@ def get_sales_data():
         })
 
     return result
-
