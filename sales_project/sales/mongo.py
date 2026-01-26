@@ -1,9 +1,8 @@
 import os
 from pymongo import MongoClient
 
-MONGO_URI = os.environ.get("MONGO_URI")
-client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-db = client["sales_db"]
+client = MongoClient(settings.MONGO_URI)
+db = client[settings.MONGO_DB_NAME]
 
 
 tenpo_col = db["tenpo"]
@@ -27,3 +26,4 @@ def get_sales_data():
 
 
     return result
+
