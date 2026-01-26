@@ -6,6 +6,8 @@ from .mongo import uriage_col, tenpo_col
 import os
 from django.conf import settings
 import json
+from pymongo import MongoClient
+
 
 client = MongoClient(settings.MONGO_URI)
 db = client[settings.MONGO_DB]
@@ -137,6 +139,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
