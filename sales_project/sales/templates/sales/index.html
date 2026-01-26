@@ -6,6 +6,9 @@
 <body>
     <h1>売上TOPページ</h1>
     <h3>店舗名を押すとその店舗の売り上げが見れるよ！</h3>
+    {% if error %}
+  <p style="color:red;">{{ error }}</p>
+{% endif %}
 
 {% for tenpo in tenpo_list %}
 <p>
@@ -15,4 +18,5 @@
 </p>
 {% endfor %}
 </body>
+
 </html>
