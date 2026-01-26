@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
-from .mongo import uriage_col, tenpo_col
+from . import mongo
 import os
 from django.conf import settings
 import json
@@ -15,11 +15,12 @@ def top(request):
         first = tenpo_col.find_one({})
         print("TENPO COUNT:", count)
         print("TENPO FIRST:", first)
-        
+
+        tenpos = list(mongo.get_tenpo_col().find({}))
         tenpo_list = [
             {"id": t["tenpo_id"], "name": t["name"]}
-            for t in tenpo_col.find()
-        ]
+            for t in tenpos]
+        return render(request, "sales/index.html", {"tenpo_list": tenpo_list}
     except Exception as e:
         return render(request, "sales/index.html", {
             "tenpo_list": [],
@@ -134,6 +135,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
