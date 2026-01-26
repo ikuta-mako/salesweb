@@ -6,24 +6,15 @@ from .mongo import uriage_col, tenpo_col
 import os
 from django.conf import settings
 import json
-from pymongo import MongoClient
-
-
-client = MongoClient(settings.MONGO_URI)
-db = client[settings.MONGO_DB]
-tenpo_col = db["tenpo"]
-uriage_col = db["uriage"]
 
 
 #トップページ
 def top(request):
     try:
-        tenpo_list = []
-        for t in tenpo_col.find():
-            tenpo_list.append({
-                "id": t["tenpo_id"],
-                "name": t["name"]
-            })
+        tenpo_list = [
+            {"id": t["tenpo_id"], "name": t["name"]}
+            for t in tenpo_col.find()
+        ]
     except Exception as e:
         return render(request, "sales/index.html", {
             "tenpo_list": [],
@@ -33,7 +24,6 @@ def top(request):
     return render(request, "sales/index.html", {
         "tenpo_list": tenpo_list
     })
-
 
 #売上一覧
 def tenpo_detail(request, tenpo_id):
@@ -139,6 +129,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
