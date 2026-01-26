@@ -125,7 +125,6 @@ STATICFILES_DIRS = [
 
 ]
 import os
-from pymongo import MongoClient
 
 MONGO_URI = os.environ.get(
     "MONGODB_URI",
@@ -133,13 +132,6 @@ MONGO_URI = os.environ.get(
 )
 MONGO_DB = os.environ.get("MONGODB_DB", "sales_db")  
 
-# MongoDB クライアント作成
-client = MongoClient(MONGO_URI)
-db = client[MONGO_DB]
-
-# コレクション指定
-tenpo_col = db["tenpo"]
-uriage_col = db["uriage"]
 
 
 
