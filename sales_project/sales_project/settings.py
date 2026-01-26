@@ -129,9 +129,9 @@ from pymongo import MongoClient
 
 MONGO_URI = os.environ.get(
     "MONGODB_URI",
-    "mongodb+srv://mako:sanokeita23@Cluster0.mongodb.net/sales_db?retryWrites=true&w=majority"
+    "mongodb+srv://mako:<db_password>@cluster0.odubgl9.mongodb.net/?appName=Cluster0"
 )
-MONGO_DB = os.environ.get("MONGODB_DB", "sales_db")  # Noneにならないようにデフォルト設定
+MONGO_DB = os.environ.get("MONGODB_DB", "sales_db")  
 
 # MongoDB クライアント作成
 client = MongoClient(MONGO_URI)
@@ -140,6 +140,7 @@ db = client[MONGO_DB]
 # コレクション指定
 tenpo_col = db["tenpo"]
 uriage_col = db["uriage"]
+
 
 
 
