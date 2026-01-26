@@ -10,26 +10,23 @@ import json
 
 #トップページ
 def top(request):
-     try:
+    try:
         tenpos = list(mongo.get_tenpo_col().find({}))
-        tenpo_list = [
-            {"id": t["tenpo_id"], "name": t["name"]}
-            for t in tenpos
-        ]
-     return render(
-            request,
-            "sales/index.html",
-            {"tenpo_list": tenpo_list}
-        )
-     except Exception as e:
+        tenpo_list = [{"id": t["tenpo_id"], "name": t["name"]} for t in tenpos]
+
         return render(
             request,
             "sales/index.html",
-            {
-                "tenpo_list": [],
-                "error": f"DB接続エラー: {e}"
-            }
+            {"tenpo_list": tenpo_list},
         )
+
+    except Exception as e:
+        return render(
+            request,
+            "sales/index.html",
+            {"tenpo_list": [], "error": f"DB接続エラー: {e}"},
+        )
+
 
 #売上一覧
 def tenpo_detail(request, tenpo_id):
@@ -135,6 +132,7 @@ def dashboard(request, tenpo_id):
              "tenpo_id": tenpo_id,
         }
     )
+
 
 
 
