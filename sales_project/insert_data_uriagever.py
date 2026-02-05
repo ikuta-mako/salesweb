@@ -1,9 +1,12 @@
 from pymongo import MongoClient
 from datetime import date, timedelta
+from urllib.parse import quote_plus
 import random
 
-# MongoDB接続
-client = MongoClient("mongodb://localhost:27017/")
+
+uri = f"mongodb+srv://mako:sanokeita23@cluster0.odubgl9.mongodb.net/sales_db?retryWrites=true&w=majority"
+
+client = MongoClient(uri)
 db = client["sales_db"]
 
 tenpo_col = db["tenpo"]
